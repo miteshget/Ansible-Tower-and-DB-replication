@@ -47,7 +47,6 @@
 
     - name: Run ansible playbook
       shell: >-
-        ansible-playbook -i inventory create-pg-replica.yml
+        ansible-playbook -i inventory create-pg-replica.yml -b
       args:
         chdir: '/tmp/ansible-tower-setup'
-        
