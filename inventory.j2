@@ -1,10 +1,10 @@
 [tower]
 {% for host in groups['towers'] %}
-{{ host }}.example.com 
+{{ host }}
 {% endfor %}
 
 [database]
-{{ groups['dbs'][0] }}.example.com  pgsqlrep_role=master
+{{ groups['dbs'][0] }}  pgsqlrep_role=master
 
 [database_replica]
 {{ groups['dbs'][0] }}.example.com  pgsqlrep_role=replica
