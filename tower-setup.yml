@@ -5,8 +5,8 @@
   tasks:
     - name: Remove directory if it exists
       file:
-      path: "/tmp/ansible-tower-setup"
-      state: absent
+        path: "/tmp/ansible-tower-setup"
+        state: absent
 
     - name: Download Tower Setup file
       unarchive:
