@@ -50,3 +50,5 @@
         ansible-playbook -i inventory create-pg-replica.yml -b
       args:
         chdir: '/tmp/ansible-tower-setup'
+      async: 3600
+      poll: 36
