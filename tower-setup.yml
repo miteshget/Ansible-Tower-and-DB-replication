@@ -1,0 +1,53 @@
+---
+- name: Prepare for tower installation
+  hosts: localhost
+
+  tasks:
+    - name: Remove directory if it exists
+      file:
+      path: "/tmp/ansible-tower-setup"
+      state: absent
+
+    - name: Download Tower Setup file
+      unarchive:
+        src: "https://releases.ansible.com/ansible-tower/setup/ansible-tower-setup-{{ tower_version }}.tar.gz"
+        dest: "/tmp/"
+        remote_src: yes 
+      tags:
+        - install-tower
+
+    - name: Rename the ansible tower setup directory name
+      shell: mv /tmp/ansible-tower-setup-* /tmp/ansible-tower-setup
+
+    - name: Create template file
+      template:
+        src: "inventory.j2"
+        dest: "/tmp/ansible-tower-setup/inventory"
+      tags:
+        - install-tower
+
+    - name: Run Ansible Tower setup
+      shell: ./setup.sh
+      args:
+        chdir: "/tmp/ansible-tower-setup"
+      async: 3600
+      poll: 36
+      tags:
+        - install-tower
+
+    - name: clone sandrom roles
+      git:
+        repo: 'https://github.com/samdoran/ansible-role-pgsql-replication.git'
+        dest: '/tmp/ansible-tower-setup/roles'
+
+    - name: clone replication playbook
+      git:
+        repo: 'https://github.com/miteshget/Ansible-Tower-and-DB-replication.git'
+        dest: '/tmp/ansible-tower-setup'
+
+    - name: Run ansible playbook
+      shell: >-
+        ansible-playbook -i inventory create-pg-replica.yml
+      args:
+        chdir: '/tmp/ansible-tower-setup'
+        

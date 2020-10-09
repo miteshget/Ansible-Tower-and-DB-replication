@@ -1,0 +1,20 @@
+[tower]
+{% for host in groups['towers'] %}
+{{ host }}.example.com 
+{% endfor %}
+
+[database]
+{{ groups['dbs'][0] }}.example.com  pgsqlrep_role=master
+
+[database_replica]
+{{ groups['dbs'][0] }}.example.com  pgsqlrep_role=replica
+
+[all:vars]
+admin_password='{{ tower_admin_password }}'
+ansible_become=yes
+pg_host='{{ groups['dbs'][0] }}'
+pg_port='5432'
+pg_database='awx'
+pg_username='awx'
+pg_password='{{ tower_admin_password }}'
+pg_sslmode='prefer'
