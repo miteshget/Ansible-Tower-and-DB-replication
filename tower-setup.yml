@@ -52,3 +52,10 @@
         chdir: '/tmp/ansible-tower-setup'
       async: 3600
       poll: 36
+      register: setup_output
+      ignore_errors: yes
+
+    - name: check tower installation
+      fail:
+        msg: "Ansible Tower installation failed"
+      when: "'skipped' not in setup_output and setup_output.failed | bool"
