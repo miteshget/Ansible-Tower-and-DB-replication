@@ -10,6 +10,9 @@
 {{ groups['dbs'][0] }}.example.com  pgsqlrep_role=replica
 
 [all:vars]
+ansible_user=cloud-user
+ansible_password=redhat
+
 admin_password='{{ tower_admin_password }}'
 ansible_become=yes
 pg_host='{{ groups['dbs'][0] }}'
