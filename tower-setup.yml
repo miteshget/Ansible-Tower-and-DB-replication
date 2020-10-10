@@ -55,6 +55,8 @@
       register: setup_output
       ignore_errors: yes
 
+    - debug: var=setup_output
+    
     - name: check tower installation
       fail:
         msg: "Ansible Tower installation failed"
