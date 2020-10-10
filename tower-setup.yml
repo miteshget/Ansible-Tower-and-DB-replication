@@ -37,10 +37,10 @@
 
     - debug: var=setup_output
     
-    - name: check tower installation
-      fail:
-        msg: "Ansible Tower installation failed"
-      when: "'skipped' not in setup_output and setup_output.failed | bool"
+    # - name: check tower installation
+    #   fail:
+    #     msg: "Ansible Tower installation failed"
+    #   when: "'skipped' not in setup_output and setup_output.failed | bool"
 
     - name: clone sandrom roles
       git:
