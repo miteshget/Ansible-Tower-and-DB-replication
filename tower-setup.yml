@@ -26,16 +26,16 @@
       tags:
         - install-tower
 
-    - name: Run Ansible Tower setup
-      shell: ./setup.sh
-      args:
-        chdir: "/tmp/ansible-tower-setup"
-      async: 3600
-      poll: 36
-      register: setup_output
-      ignore_errors: yes
+    # - name: Run Ansible Tower setup
+    #   shell: ./setup.sh
+    #   args:
+    #     chdir: "/tmp/ansible-tower-setup"
+    #   async: 3600
+    #   poll: 36
+    #   register: setup_output
+    #   ignore_errors: yes
 
-    - debug: var=setup_output
+    # - debug: var=setup_output
     
     # - name: check tower installation
     #   fail:
