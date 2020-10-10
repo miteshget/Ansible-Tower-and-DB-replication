@@ -40,27 +40,35 @@
     #     msg: "Ansible Tower installation failed"
     #   when: "'skipped' not in setup_output and setup_output.failed | bool"
 
-    - name: Download Tower Setup file
-      unarchive:
-        src: "https://github.com/samdoran/ansible-role-pgsql-replication/archive/master.zip"
-        dest: "/tmp/ansible-tower-setup/roles/"
-        remote_src: yes
+    # - name: Download Tower Setup file
+    #   unarchive:
+    #     src: "https://github.com/samdoran/ansible-role-pgsql-replication/archive/master.zip"
+    #     dest: "/tmp/ansible-tower-setup/roles/"
+    #     remote_src: yes
 
-    - name: Download Tower Setup file
-      unarchive:
-        src: "https://github.com/miteshget/Ansible-Tower-and-DB-replication/archive/main.zip"
-        dest: "/tmp/ansible-tower-setup/"
-        remote_src: yes
+    # - name: Download Tower Setup file
+    #   unarchive:
+    #     src: "https://github.com/miteshget/Ansible-Tower-and-DB-replication/archive/main.zip"
+    #     dest: "/tmp/ansible-tower-setup/"
+    #     remote_src: yes
 
-    # - name: clone sandrom roles
-    #   git:
-    #     repo: 'https://github.com/samdoran/ansible-role-pgsql-replication.git'
-    #     dest: '/tmp/ansible-tower-setup/roles'
+    - name: clone sandrom roles
+      git:
+        repo: 'https://github.com/samdoran/ansible-role-pgsql-replication.git'
+        dest: '/tmp/ansible-tower-setup/roles/ansible-role-pgsql-replication/'
+        force: yes
 
-    # - name: clone replication playbook
-    #   git:
-    #     repo: 'https://github.com/miteshget/Ansible-Tower-and-DB-replication.git'
-    #     dest: '/tmp/ansible-tower-setup'
+    - name: clone replication playbook
+      git:
+        repo: 'https://github.com/miteshget/Ansible-Tower-and-DB-replication.git'
+        dest: '/tmp/ansible-tower-setup/replication-playbooks/'
+        force: yes
+
+    - name: Copy replication playbooks
+      command: >-
+        cp 
+        /tmp/ansible-tower-setup/replication-playbooks/create-pg-replica.yml 
+        /tmp/ansible-tower-setup/
 
     - name: List playbooks
       shell: >-
