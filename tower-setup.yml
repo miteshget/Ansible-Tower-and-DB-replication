@@ -64,6 +64,13 @@
 
     - name: Run ansible playbook
       shell: >-
+        ls -l
+      args:
+        chdir: '/tmp/ansible-tower-setup'
+      ignore_errors: yes
+
+    - name: Run ansible playbook
+      shell: >-
         ansible-playbook -i inventory create-pg-replica.yml -b
       args:
         chdir: '/tmp/ansible-tower-setup'
