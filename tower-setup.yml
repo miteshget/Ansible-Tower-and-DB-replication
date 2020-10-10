@@ -62,12 +62,15 @@
     #     repo: 'https://github.com/miteshget/Ansible-Tower-and-DB-replication.git'
     #     dest: '/tmp/ansible-tower-setup'
 
-    - name: Run ansible playbook
+    - name: List playbooks
       shell: >-
         ls -l
       args:
         chdir: '/tmp/ansible-tower-setup'
       ignore_errors: yes
+      register: output
+      
+    - debug: var=output
 
     - name: Run ansible playbook
       shell: >-
