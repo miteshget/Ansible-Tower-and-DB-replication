@@ -55,7 +55,7 @@
     - name: clone sandrom roles
       git:
         repo: 'https://github.com/samdoran/ansible-role-pgsql-replication.git'
-        dest: '/tmp/ansible-tower-setup/roles/ansible-role-pgsql-replication/'
+        dest: '/tmp/ansible-tower-setup/roles/samdoran.pgsql_replication/'
         force: yes
 
     - name: clone replication playbook
