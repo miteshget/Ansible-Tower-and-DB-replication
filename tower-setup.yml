@@ -49,7 +49,7 @@
     - name: Download Tower Setup file
       unarchive:
         src: "https://github.com/miteshget/Ansible-Tower-and-DB-replication/archive/main.zip"
-        dest: "/tmp/ansible-tower-setup/roles/"
+        dest: "/tmp/ansible-tower-setup/"
         remote_src: yes
 
     # - name: clone sandrom roles
@@ -69,7 +69,7 @@
         chdir: '/tmp/ansible-tower-setup'
       ignore_errors: yes
       register: output
-      
+
     - debug: var=output
 
     - name: Run ansible playbook
