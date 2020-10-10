@@ -7,7 +7,7 @@
 {{ groups['dbs'][0] }}  pgsqlrep_role=master
 
 [database_replica]
-{{ groups['dbs'][0] }}.example.com  pgsqlrep_role=replica
+{{ groups['dbs'][0] }}  pgsqlrep_role=replica
 
 [all:vars]
 ansible_user=cloud-user
